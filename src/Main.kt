@@ -2,6 +2,7 @@ const val INVALID_OPERATION: String = "Invalid operation. Try again."
 const val WITHDRAW_ERROR: String = "Withdraw value greater than account balance."
 const val AMOUNT_DEPOSIT: String = "Enter the amount to deposit."
 const val AMOUNT_WITHDRAW: String = "Enter the amount to withdraw."
+const val CLOSE_APP: String = "9. Close the app"
 
 fun printUi() {
     println("Welcome to your banking system.")
@@ -63,7 +64,7 @@ class DebitAccount: BankAccount(balance = 0F) {
 
     override fun listOptions(): Int {
         super.listOptions()
-        println("What would you like to do?\n1. Check balance\n2. Deposit\n3. Withdraw")
+        println("What would you like to do?\n1. Check balance\n2. Deposit\n3. Withdraw\n$CLOSE_APP")
         return readln().toInt()
     }
 
@@ -97,7 +98,7 @@ class CreditAccount: BankAccount(balance = 5000F) {
 
     override fun listOptions(): Int {
         super.listOptions()
-        println("What would you like to do?\n1. Check balance\n2. Withdraw")
+        println("What would you like to do?\n1. Check balance\n2. Withdraw\n$CLOSE_APP")
         return readln().toInt()
     }
 
@@ -132,7 +133,7 @@ class CheckingAccount: BankAccount(balance = 0F) {
 
     override fun listOptions(): Int {
         super.listOptions()
-        println("What would you like to do?\n1. Check balance\n2. Deposit\n3. Withdraw")
+        println("What would you like to do?\n1. Check balance\n2. Deposit\n3. Withdraw\n$CLOSE_APP")
         return readln().toInt()
     }
 
@@ -166,6 +167,10 @@ fun main() {
     }
     while (true) {
         val chosenOperation = account.listOptions()
+        if(chosenOperation == 9) {
+            println("Closing the app...")
+            break
+        }
         account.performOperation(chosenOperation)
     }
 }
